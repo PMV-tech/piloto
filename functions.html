@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções - BarberFlow</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .functions-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .functions-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .functions-logo {
+            font-size: 36px;
+            font-weight: 700;
+            color: #4cc9f0;
+            margin-bottom: 10px;
+        }
+        .function-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .function-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .function-icon {
+            font-size: 24px;
+            color: #4cc9f0;
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+        .function-title {
+            font-weight: 600;
+            color: #1a1a2e;
+            font-size: 18px;
+        }
+        .function-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .function-params {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .param-item {
+            display: flex;
+            margin-bottom: 8px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .param-name {
+            color: #d63384;
+            min-width: 150px;
+        }
+        .param-desc {
+            color: #666;
+        }
+        .function-example {
+            background: #1a1a2e;
+            color: #4cc9f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="functions-container">
+        <div class="functions-header">
+            <div class="functions-logo">
+                <i class="fas fa-cut"></i>
+                BarberFlow Functions
+            </div>
+            <p style="color: #666;">
+                Documentação das funções JavaScript disponíveis no sistema
+            </p>
+        </div>
+        
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i>
+            Estas funções estão disponíveis globalmente através do objeto <code>window.BarberFlow</code>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="function-title">formatDate(date, format)</div>
+            </div>
+            <div class="function-description">
+                Formata uma data para exibição. Aceita objetos Date, strings ou timestamps.
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">date</div>
+                    <div class="param-desc">Data a ser formatada (Date, string ou timestamp)</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">format (opcional)</div>
+                    <div class="param-desc">Formato da data (padrão: 'dd/MM/yyyy')</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplos de uso:<br>
+                BarberFlow.formatDate(new Date());<br>
+                // Resultado: "15/03/2024"<br><br>
+                BarberFlow.formatDate('2024-03-15', 'dd/MM/yyyy HH:mm');<br>
+                // Resultado: "15/03/2024 14:30"
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <div class="function-title">formatCurrency(value)</div>
+            </div>
+            <div class="function-description">
+                Formata um valor numérico como moeda brasileira (Real).
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">value</div>
+                    <div class="param-desc">Valor numérico a ser formatado</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplos de uso:<br>
+                BarberFlow.formatCurrency(150.75);<br>
+                // Resultado: "R$ 150,75"<br><br>
+                BarberFlow.formatCurrency('2850');<br>
+                // Resultado: "R$ 2.850,00"
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="function-title">formatPhone(value)</div>
+            </div>
+            <div class="function-description">
+                Formata um número de telefone para o padrão brasileiro.
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">value</div>
+                    <div class="param-desc">Número de telefone a ser formatado</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplos de uso:<br>
+                BarberFlow.formatPhone('11999998888');<br>
+                // Resultado: "(11) 99999-8888"<br><br>
+                BarberFlow.formatPhone('1133334444');<br>
+                // Resultado: "(11) 3333-4444"
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="function-title">isValidEmail(email)</div>
+            </div>
+            <div class="function-description">
+                Valida se uma string é um endereço de e-mail válido.
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">email</div>
+                    <div class="param-desc">Endereço de e-mail a ser validado</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplos de uso:<br>
+                BarberFlow.isValidEmail('usuario@email.com');<br>
+                // Resultado: true<br><br>
+                BarberFlow.isValidEmail('usuario@email');<br>
+                // Resultado: false
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-comment-alt"></i>
+                </div>
+                <div class="function-title">showMessage(message, type, duration)</div>
+            </div>
+            <div class="function-description">
+                Exibe uma mensagem toast na tela. Tipos disponíveis: 'success', 'error', 'warning', 'info'.
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">message</div>
+                    <div class="param-desc">Texto da mensagem a ser exibida</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">type (opcional)</div>
+                    <div class="param-desc">Tipo da mensagem (padrão: 'info')</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">duration (opcional)</div>
+                    <div class="param-desc">Duração em milissegundos (padrão: 5000)</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplos de uso:<br>
+                BarberFlow.showMessage('Operação concluída!', 'success');<br><br>
+                BarberFlow.showMessage('Erro ao salvar dados.', 'error', 3000);
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="function-title">confirmAction(message, confirmText, cancelText)</div>
+            </div>
+            <div class="function-description">
+                Exibe um modal de confirmação personalizado. Retorna uma Promise que resolve com true (confirmado) ou false (cancelado).
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">message</div>
+                    <div class="param-desc">Mensagem de confirmação</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">confirmText (opcional)</div>
+                    <div class="param-desc">Texto do botão confirmar (padrão: 'Confirmar')</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">cancelText (opcional)</div>
+                    <div class="param-desc">Texto do botão cancelar (padrão: 'Cancelar')</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplo de uso:<br>
+                async function deleteItem() {<br>
+                &nbsp;&nbsp;const confirmed = await BarberFlow.confirmAction('Deseja excluir este item?');<br>
+                &nbsp;&nbsp;if (confirmed) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;// Executar exclusão<br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-spinner"></i>
+                </div>
+                <div class="function-title">showLoading() / hideLoading()</div>
+            </div>
+            <div class="function-description">
+                Exibe e esconde um overlay de loading na tela.
+            </div>
+            <div class="function-example">
+                // Exemplo de uso:<br>
+                BarberFlow.showLoading();<br>
+                // Executar operação assíncrona...<br>
+                BarberFlow.hideLoading();
+            </div>
+        </div>
+        
+        <div class="function-card">
+            <div class="function-header">
+                <div class="function-icon">
+                    <i class="fas fa-file-export"></i>
+                </div>
+                <div class="function-title">exportToCsv(data, filename)</div>
+            </div>
+            <div class="function-description">
+                Exporta um array de objetos para um arquivo CSV.
+            </div>
+            <div class="function-params">
+                <div class="param-item">
+                    <div class="param-name">data</div>
+                    <div class="param-desc">Array de objetos a serem exportados</div>
+                </div>
+                <div class="param-item">
+                    <div class="param-name">filename (opcional)</div>
+                    <div class="param-desc">Nome do arquivo (padrão: 'export.csv')</div>
+                </div>
+            </div>
+            <div class="function-example">
+                // Exemplo de uso:<br>
+                const data = [<br>
+                &nbsp;&nbsp;{ nome: 'João', email: 'joao@email.com' },<br>
+                &nbsp;&nbsp;{ nome: 'Maria', email: 'maria@email.com' }<br>
+                ];<br>
+                BarberFlow.exportToCsv(data, 'clientes.csv');
+            </div>
+        </div>
+        
+        <div class="text-center mt-40">
+            <a href="dashboard.html" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+            </a>
+            <a href="../index.html" class="btn btn-outline" style="margin-left: 10px;">
+                <i class="fas fa-home"></i> Página Inicial
+            </a>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Demonstrar algumas funções
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Funções BarberFlow disponíveis:', Object.keys(window.BarberFlow || {}));
+            
+            // Demonstrar formatação na página
+            const examples = document.querySelectorAll('.function-example');
+            examples.forEach(example => {
+                const html = example.innerHTML;
+                // Realçar código
+                example.innerHTML = html.replace(
+                    /\/\/.*$/gm, 
+                    '<span style="color: #6c757d;">$&</span>'
+                ).replace(
+                    /BarberFlow\.[a-zA-Z]+/g,
+                    '<span style="color: #4cc9f0;">$&</span>'
+                );
+            });
+        });
+    </script>
+</body>
+</html>

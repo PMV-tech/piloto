@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Banco - BarberFlow</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .database-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+        }
+        .database-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .database-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .database-logo {
+            font-size: 48px;
+            font-weight: 800;
+            color: #4cc9f0;
+            margin-bottom: 10px;
+        }
+        .database-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+        .database-step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4cc9f0;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .step-icon {
+            font-size: 24px;
+            color: #4cc9f0;
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+        .step-title {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .step-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        .sql-code {
+            background: #1a1a2e;
+            color: #4cc9f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        .test-accounts {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 2px dashed #4cc9f0;
+        }
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .account-info {
+            flex: 1;
+        }
+        .account-name {
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+        .account-email {
+            font-size: 12px;
+            color: #666;
+        }
+        .account-password {
+            background: #4cc9f0;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .database-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="database-container">
+        <div class="database-box">
+            <div class="database-header">
+                <div class="database-logo">
+                    <i class="fas fa-cut"></i>
+                    BarberFlow
+                </div>
+                <h1 class="database-title">🔧 Configurar Banco de Dados</h1>
+                <p style="color: #666;">
+                    Esta página guia você na configuração do banco de dados do sistema.
+                </p>
+            </div>
+            
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <strong>MySQL conectado com sucesso!</strong>
+                Servidor: localhost | Usuário: root
+            </div>
+            
+            <div class="database-step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="step-title">1. Criar Banco de Dados</div>
+                </div>
+                <div class="step-content">
+                    <p>O banco de dados <strong>"barberflow"</strong> será criado com a seguinte configuração:</p>
+                    <div class="sql-code">
+                        CREATE DATABASE barberflow<br>
+                        CHARACTER SET utf8mb4<br>
+                        COLLATE utf8mb4_unicode_ci;
+                    </div>
+                    <div style="display: flex; align-items: center; color: #28a745;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <span>Banco criado com sucesso!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="database-step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-table"></i>
+                    </div>
+                    <div class="step-title">2. Criar Tabelas</div>
+                </div>
+                <div class="step-content">
+                    <p>As seguintes tabelas serão criadas:</p>
+                    <ul style="margin: 10px 0 10px 20px; color: #666;">
+                        <li><strong>usuarios</strong> - Contas de usuários do sistema</li>
+                        <li><strong>clientes</strong> - Cadastro de clientes da barbearia</li>
+                        <li><strong>agendamentos</strong> - Registro de agendamentos</li>
+                    </ul>
+                    <div class="sql-code">
+                        CREATE TABLE usuarios (<br>
+                        &nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>
+                        &nbsp;&nbsp;nome VARCHAR(100) NOT NULL,<br>
+                        &nbsp;&nbsp;email VARCHAR(100) UNIQUE NOT NULL,<br>
+                        &nbsp;&nbsp;senha VARCHAR(255) NOT NULL,<br>
+                        &nbsp;&nbsp;tipo ENUM('admin', 'barbeiro', 'cliente')<br>
+                        );
+                    </div>
+                    <div style="display: flex; align-items: center; color: #28a745;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <span>3 tabelas criadas com sucesso!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="database-step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="step-title">3. Criar Usuários de Exemplo</div>
+                </div>
+                <div class="step-content">
+                    <p>As seguintes contas serão criadas para testes:</p>
+                    
+                    <div class="test-accounts">
+                        <div class="account-item">
+                            <div class="account-info">
+                                <div class="account-name">👑 Administrador</div>
+                                <div class="account-email">admin@barberflow.com</div>
+                            </div>
+                            <div class="account-password">123456</div>
+                        </div>
+                        
+                        <div class="account-item">
+                            <div class="account-info">
+                                <div class="account-name">✂️ Barbeiro</div>
+                                <div class="account-email">carlos@barberflow.com</div>
+                            </div>
+                            <div class="account-password">123456</div>
+                        </div>
+                        
+                        <div class="account-item">
+                            <div class="account-info">
+                                <div class="account-name">👤 Cliente</div>
+                                <div class="account-email">joao@barberflow.com</div>
+                            </div>
+                            <div class="account-password">123456</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; color: #28a745;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <span>3 usuários criados com sucesso!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="database-step">
+                <div class="step-header">
+                    <div class="step-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <div class="step-title">4. Dados de Exemplo</div>
+                </div>
+                <div class="step-content">
+                    <p>Dados de demonstração serão inseridos para testes:</p>
+                    <ul style="margin: 10px 0 10px 20px; color: #666;">
+                        <li>5 clientes de exemplo</li>
+                        <li>10 agendamentos de exemplo</li>
+                        <li>Serviços variados com datas diferentes</li>
+                    </ul>
+                    <div style="display: flex; align-items: center; color: #28a745;">
+                        <i class="fas fa-check-circle" style="margin-right: 10px;"></i>
+                        <span>15 registros de exemplo inseridos!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-chart-bar"></i>
+                <strong>Resumo do Banco:</strong>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px;">
+                    <div style="text-align: center; padding: 10px; background: rgba(76, 201, 240, 0.1); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #4cc9f0;">3</div>
+                        <div style="font-size: 14px;">tabelas</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(76, 201, 240, 0.1); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #4cc9f0;">3</div>
+                        <div style="font-size: 14px;">usuários</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: rgba(76, 201, 240, 0.1); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: bold; color: #4cc9f0;">15</div>
+                        <div style="font-size: 14px;">registros</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="database-actions">
+                <a href="login.html" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Ir para Login
+                </a>
+                
+                <a href="dashboard.html" class="btn btn-success">
+                    <i class="fas fa-tachometer-alt"></i> Ir para Dashboard
+                </a>
+                
+                <a href="register.html" class="btn btn-warning">
+                    <i class="fas fa-user-plus"></i> Criar Nova Conta
+                </a>
+                
+                <a href="reset_sistema.html" class="btn btn-danger">
+                    <i class="fas fa-redo"></i> Resetar Sistema
+                </a>
+                
+                <a href="../index.html" class="btn" style="background: #f8f9fa; color: #333;">
+                    <i class="fas fa-home"></i> Voltar para Home
+                </a>
+            </div>
+            
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; text-align: center;">
+                <p style="color: #666; font-size: 14px;">
+                    <i class="fas fa-info-circle"></i>
+                    Esta é uma demonstração. Em um sistema real com PHP, o banco seria criado automaticamente.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Simular criação do banco
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página de criação de banco carregada');
+            
+            // Em um sistema real, aqui teríamos requisições AJAX para criar o banco
+            // Esta é apenas uma demonstração estática
+        });
+    </script>
+</body>
+</html>

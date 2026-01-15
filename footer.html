@@ -1,0 +1,155 @@
+    <!-- Scripts JavaScript -->
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // Funções globais para todas as páginas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-hide alerts após 5 segundos
+            setTimeout(function() {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    alert.style.opacity = '0';
+                    alert.style.transition = 'opacity 0.5s';
+                    setTimeout(() => alert.remove(), 500);
+                });
+            }, 5000);
+            
+            // Validação básica de formulários
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const requiredFields = form.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = '#dc3545';
+                            field.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.1)';
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        e.preventDefault();
+                        alert('Por favor, preencha todos os campos obrigatórios.');
+                    }
+                });
+            });
+            
+            // Formatação de telefone
+            const phoneInputs = document.querySelectorAll('input[type="tel"]');
+            phoneInputs.forEach(input => {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 10) {
+                        value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                    } else if (value.length > 6) {
+                        value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+                    } else if (value.length > 2) {
+                        value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+                    } else if (value.length > 0) {
+                        value = value.replace(/^(\d*)/, '($1');
+                    }
+                    e.target.value = value;
+                });
+            });
+            
+            // Adicionar classe active aos links ativos
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.split('/').pop();
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const href = item.getAttribute('href');
+                if (href === currentPage) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Função para mostrar alerta
+        function showAlert(message, type = 'info') {
+            // Remover alertas existentes
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
+            
+            // Criar novo alerta
+            const alert = document.createElement('div');
+            alert.className = `custom-alert alert-${type}`;
+            alert.innerHTML = `
+                <div class="alert-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                     type === 'error' ? 'exclamation-circle' : 
+                                     type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                    <button class="alert-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+                </div>
+            `;
+            
+            // Estilos do alerta
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+                max-width: 400px;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            const typeStyles = {
+                'success': 'background: #d4edda; color: #155724; border-left: 4px solid #28a745;',
+                'error': 'background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545;',
+                'warning': 'background: #fff3cd; color: #856404; border-left: 4px solid #ffc107;',
+                'info': 'background: #d1ecf1; color: #0c5460; border-left: 4px solid #17a2b8;'
+            };
+            
+            alert.querySelector('.alert-content').style.cssText = `
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                ${typeStyles[type] || typeStyles.info}
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto-remover após 5 segundos
+            setTimeout(() => {
+                if (alert.parentElement) {
+                    alert.remove();
+                }
+            }, 5000);
+        }
+        
+        // Adicionar estilos CSS para animações
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            .custom-alert .alert-close {
+                background: none;
+                border: none;
+                font-size: 20px;
+                cursor: pointer;
+                margin-left: auto;
+                padding: 0;
+                line-height: 1;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
