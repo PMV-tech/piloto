@@ -37,6 +37,9 @@
             flex-direction: column;
             gap: 10px;
         }
+        a{
+            decoation: none;
+        }
     </style>
 </head>
 <body>
@@ -59,7 +62,7 @@
             
             <div class="logout-actions">
                 <button class="btn btn-danger btn-lg" onclick="performLogout()">
-                    <i class="fas fa-sign-out-alt"></i> Confirmar Logout
+                    <i class="fas fa-sign-out-alt"></i> <a href="../conta/login.html">Confirmar Logout</a>
                 </button>
                 <a href="../dashboard/dashboard.html" class="btn btn-outline btn-lg">
                     <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
@@ -84,7 +87,6 @@
             
             // Mostrar mensagem e redirecionar
             alert('Você foi desconectado com sucesso!');
-            window.location.href = '../../conta/login.html';
         }
         
         // Auto-redirecionar após 30 segundos de inatividade
@@ -113,6 +115,7 @@
 </body>
 
 </html>
+
 
 
 
